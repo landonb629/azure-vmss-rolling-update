@@ -4,6 +4,9 @@ inputs:
   resourceGroup:
     description: 'name of resource group for virtual machine scale set'
     required: true 
+  tenantId:
+    description: 'tenant id'
+    required: true
 outputs:
   resourceGroupId: 
     description: 'the ID of the resource group that was found'
@@ -12,3 +15,4 @@ runs:
   image: 'Dockerfile'
   args: 
     - ${{ inputs.resourceGroup }}
+    - ${{ inputs.tenantId }}

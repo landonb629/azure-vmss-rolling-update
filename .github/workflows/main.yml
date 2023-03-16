@@ -13,6 +13,6 @@ jobs:
         id: test 
         with: 
           resourceGroup: 'mern'
-          
+          tenantId: 'testingTID'
       - name: get the output 
         run: echo ${{ steps.test.outputs.resourceGroupId }}
