@@ -9,5 +9,7 @@ outputs:
   hey: 
     description: 'random output'
 runs:
-  using: 'node16'
-  main: 'dist/index.js'
+  using: 'docker'
+  image: 'Dockerfile'
+  args: 
+    - ${{ inputs.test }}
