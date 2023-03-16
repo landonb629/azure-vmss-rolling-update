@@ -1,5 +1,5 @@
 #!/bin/sh -l 
 
-echo $1
+echo "Resource Group: $1"
 resourceGroupId=$($1)
 echo "resourceGroupId=$resourceGroupId" >> $GITHUB_OUTPUT
