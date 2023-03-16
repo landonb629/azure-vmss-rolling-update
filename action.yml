@@ -1,0 +1,13 @@
+name: 'Trigger Azure Virtual Machine Scale Set Rolling Update'
+description: 'triggers a rolling update for azure virtual machine scale set'
+inputs: 
+  test:
+    description: 'the test'
+    required: true 
+    default: 'landon'
+outputs:
+  hey: 
+    description: 'random output'
+runs:
+  using: 'node16'
+  main: 'index.js'

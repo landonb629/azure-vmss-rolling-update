@@ -1,0 +1,23 @@
+{
+  "name": "azure-vmss-rolling-update",
+  "version": "1.0.0",
+  "description": "Github actions to help with easily rolling out new actions to an Azure virtual machine scale set",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/landonb629/azure-vmss-rolling-update.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/landonb629/azure-vmss-rolling-update/issues"
+  },
+  "homepage": "https://github.com/landonb629/azure-vmss-rolling-update#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1"
+  }
+}
