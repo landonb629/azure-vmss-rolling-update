@@ -13,6 +13,6 @@ jobs:
         id: test 
         with: 
           resourceGroup: 'mern'
-          tenantId: 'testingTID'
+          tenantId: ${{ secrets.AZURE_TENANT_ID }}
       - name: get the output 
         run: echo ${{ steps.test.outputs.resourceGroupId }}
