@@ -1,4 +1,4 @@
-FROM alpine:3.10
+FROM node
 
 COPY entrypoint.sh /entrypoint.sh
 

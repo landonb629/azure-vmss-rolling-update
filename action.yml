@@ -1,13 +1,12 @@
 name: 'Trigger Azure Virtual Machine Scale Set Rolling Update'
 description: 'triggers a rolling update for azure virtual machine scale set'
 inputs: 
-  test:
-    description: 'the test'
+  resourceGroup:
+    description: 'name of resource group for virtual machine scale set'
     required: true 
-    default: 'landon'
 outputs:
-  hey: 
-    description: 'random output'
+  resourceGroupId: 
+    description: 'the ID of the resource group that was found'
 runs:
   using: 'docker'
   image: 'Dockerfile'
