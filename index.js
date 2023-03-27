@@ -7,7 +7,9 @@ const { ResourceManagementClient } = require('@azure/arm-resources')
 const tenantId = process.env["AZURE_TENANT_ID"]
 const clientId = process.env["AZURE_CLIENT_ID"]
 const clientSecret = process.env["AZURE_CLIENT_SECRET"]
-const resourceGroupName = "mern-app"
+const resourceGroupName = "aks-demos"
+const vmScaleSetName = "test"
+const updatedImage = ""
 
 
 const creds = new ClientSecretCredential(tenantId, clientId, clientSecret)
@@ -15,22 +17,40 @@ const creds = new ClientSecretCredential(tenantId, clientId, clientSecret)
 const main = async () => { 
 try { 
     const getSubId = await listSubs()
-    const client = new ResourceManagementClient(creds, getSubId)
     const rg = resourceGroupName
+    /*
     for await (const rgs of client.resourceGroups.list()) { 
         console.log(rgs.name)
     }
-    //const vmScaleSetName = "test"
-    //const imageId = "demo-image"
-    //const computeClient = new ComputeManagementClient(creds, getSubId)
-    //console.log(computeClient)
+    */
+   const client = new ComputeManagementClient(creds, getSubId)
+   const result = await client.virtualMachineScaleSets.get(rg, vmScaleSetName)
+   const parameter = { 
+        virtualMachineProfile: { 
+            storageProfile: { 
+                imageReference: { 
+                  id: "/subscriptions/f80dea2d-81bb-442f-a102-d86eb72cb7d6/resourceGroups/aks-demos/providers/Microsoft.Compute/images/prod-frontend-new"
+                }
+            }
+        }
+   }
+   // code to update the vm scale set 
+   const update = await client.virtualMachineScaleSets.beginUpdate(rg, vmScaleSetName, parameter )
+   // code to get the status object
+   let status = await client.virtualMachineScaleSets.getInstanceView(rg, vmScaleSetName)
+   // code to return the code
+   let progress = status.statuses.forEach((index)=> console.log(index.code));
+   //while (progress !== "ProvisioningState/succeeded") {
+     
+   //}
+
+   //console.log(update);
+   //console.log(result);
+   //console.log(result.virtualMachineProfile.storageProfile.imageReference);
 } catch(error) { 
     console.log(error)
 }
-
-
 }
-
 
 // function where we get the subscription ID that we are authenticated to 
 const listSubs = async () => { 
