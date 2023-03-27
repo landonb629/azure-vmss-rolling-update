@@ -7,6 +7,15 @@ inputs:
   tenantId:
     description: 'tenant id'
     required: true
+  clientId:
+    description: 'client id'
+    required: true 
+  clientSecret:
+    description: 'client secret'
+    required: true 
+  scaleSetName: 
+    description: 'scale set name'
+    required: true
 outputs:
   resourceGroupId: 
     description: 'the ID of the resource group that was found'
