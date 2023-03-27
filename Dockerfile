@@ -1,10 +1,5 @@
 FROM ubuntu
 
-ARG imageid 
-ARG username 
-ARG password 
-ARG tenant
-
 RUN apt-get update && \
     apt-get install curl vim -y
 

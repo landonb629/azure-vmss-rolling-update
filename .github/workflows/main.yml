@@ -17,6 +17,13 @@ jobs:
           tenantId: ${{ secrets.AZURE_TENANT_ID }}
           clientId: ${{secrets.AZURE_CLIENT_ID}}
           clientSecret: ${{secrets.AZURE_CLIENT_SECRET}}
+        env:
+          resourceGroup: 'aks-demo'
+          scaleSetName: 'test'
+          tenantId: ${{ secrets.AZURE_TENANT_ID }}
+          clientId: ${{secrets.AZURE_CLIENT_ID}}
+          clientSecret: ${{secrets.AZURE_CLIENT_SECRET}}
+          
           
       - name: get the output 
         run: echo ${{ steps.test.outputs.resourceGroupId }}
