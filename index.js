@@ -3,45 +3,51 @@ const { SubscriptionClient } = require('@azure/arm-subscriptions')
 const { ComputeManagementClient } = require('@azure/arm-compute')
 const { ResourceManagementClient } = require('@azure/arm-resources')
 
+/*
+1. update the virtual machine scale set
+2. wait for it to be complete
+3. return 
+
+*/
+
 // bash script would need to set the environment variables 
 const tenantId = process.env["AZURE_TENANT_ID"]
 const clientId = process.env["AZURE_CLIENT_ID"]
 const clientSecret = process.env["AZURE_CLIENT_SECRET"]
-const resourceGroupName = "aks-demos"
-const vmScaleSetName = "test"
-const updatedImage = ""
+const resourceGroupName = process.env["resourceGroup"]
+const vmScaleSetName = process.env["scaleSetName"]
+const updatedImage = "/subscriptions/f80dea2d-81bb-442f-a102-d86eb72cb7d6/resourceGroups/aks-demos/providers/Microsoft.Compute/images/prod-frontend-new"
+
+/*
+    for await (const rgs of client.resourceGroups.list()) { 
+        console.log(rgs.name)
+    }
+    */
 
 
 const creds = new ClientSecretCredential(tenantId, clientId, clientSecret)
 
 const main = async () => { 
 try { 
-    const getSubId = await listSubs()
-    const rg = resourceGroupName
-    /*
-    for await (const rgs of client.resourceGroups.list()) { 
-        console.log(rgs.name)
-    }
-    */
-   const client = new ComputeManagementClient(creds, getSubId)
-   const result = await client.virtualMachineScaleSets.get(rg, vmScaleSetName)
-   const parameter = { 
+    const getSubscriptionId = await listSubs()
+    const client = new ComputeManagementClient(creds, getSubscriptionId)
+    //const result = await client.virtualMachineScaleSets.get(resourceGroupName, vmScaleSetName)
+    const parameter = { 
         virtualMachineProfile: { 
             storageProfile: { 
                 imageReference: { 
-                  id: "/subscriptions/f80dea2d-81bb-442f-a102-d86eb72cb7d6/resourceGroups/aks-demos/providers/Microsoft.Compute/images/prod-frontend-new"
+                  id: `${updatedImage}`
                 }
             }
         }
    }
+   const updatingVirtualMachineScaleSet = updateScaleSet(resourceGroupName, vmScaleSetName, parameter, client)
    // code to update the vm scale set 
-   const update = await client.virtualMachineScaleSets.beginUpdate(rg, vmScaleSetName, parameter )
    // code to get the status object
-   let status = await client.virtualMachineScaleSets.getInstanceView(rg, vmScaleSetName)
+   
    // code to return the code
-   let progress = status.statuses.forEach((index)=> console.log(index.code));
+   
    //while (progress !== "ProvisioningState/succeeded") {
-     
    //}
 
    //console.log(update);
@@ -63,6 +69,26 @@ const listSubs = async () => {
         }
     } catch(error) { 
         console.log(error)
+    }
+}
+
+const updateScaleSet = async (resourceGroup, scaleSetName, parameter, client) => { 
+    try { 
+       const triggerUpdate =  await client.virtualMachineScaleSets.beginUpdate(resourceGroup, scaleSetName, parameter )
+       console.log(triggerUpdate);
+       return 
+    } catch(error) { 
+      console.log(error);
+    }
+}
+
+const checkScaleSet = async (resourecGroup, scaleSetName, client) => { 
+    try { 
+        let status = await client.virtualMachineScaleSets.getInstanceView(resourceGroupName, vmScaleSetName)
+        let progress = status.statuses.forEach((index)=> console.log(index.code));
+        return
+    } catch(error) { 
+
     }
 }
 
