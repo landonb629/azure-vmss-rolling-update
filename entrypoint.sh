@@ -11,6 +11,6 @@ export CLIENT_SECRET=$clientSecret
 export TENANT_ID=$tenantId
 
 az login --service-principal --username $CLIENT_ID --password $CLIENT_SECRET --tenant $TENANT_ID
-az group show -o table
+az group list -o table
 
 
