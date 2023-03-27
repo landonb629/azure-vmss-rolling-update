@@ -16,3 +16,6 @@ runs:
   args: 
     - ${{ inputs.resourceGroup }}
     - ${{ inputs.tenantId }}
+    - ${{ inputs.clientId}}
+    - ${{ inputs.clientSecret}}
+    - ${{ inputs.scaleSetName }}
