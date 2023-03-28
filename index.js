@@ -30,19 +30,13 @@ try {
         }
    }
    const triggerUpdate = await client.virtualMachineScaleSets.beginUpdateAndWait(resourceGroupName, vmScaleSetName, parameter)
-   console.log(triggerUpdate);
+   console.log('running rolling update....');
+   console.log(`Rolling update status: ${triggerUpdate.status}`);
+   let status = await client.virtualMachineScaleSets.getInstanceView(resourceGroupName, vmScaleSetName)
+   let progress = status.statuses[0].code;
+   console.log(progress);
    //const updatingVirtualMachineScaleSet = updateScaleSet(resourceGroupName, vmScaleSetName, parameter, client)
-   // code to update the vm scale set 
-   // code to get the status object
-   
-   // code to return the code
-   
-   //while (progress !== "ProvisioningState/succeeded") {
-   //}
 
-   //console.log(update);
-   //console.log(result);
-   //console.log(result.virtualMachineProfile.storageProfile.imageReference);
 } catch(error) { 
     console.log(error)
 }
