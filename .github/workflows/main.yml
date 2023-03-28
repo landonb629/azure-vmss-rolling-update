@@ -2,7 +2,7 @@ on:
   - push
 jobs: 
   helloworld:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     name: first job 
     steps:
       - name: checkout 
