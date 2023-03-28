@@ -1,7 +1,7 @@
 FROM ubuntu
 
 RUN apt-get update && \
-    apt-get install curl vim nodejs -y
+    apt-get install curl vim nodejs npm -y
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
