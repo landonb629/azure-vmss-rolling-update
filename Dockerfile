@@ -11,6 +11,8 @@ COPY package.json package-lock.json ./
 
 RUN npm install
 
+COPY . .
+
 COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]

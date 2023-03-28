@@ -5,6 +5,7 @@ echo $scaleSetName
 echo $tenantId 
 echo $clientId 
 echo $clientSecret
+echo $subscriptionId
 
 #export CLIENT_ID=$clientId 
 #export CLIENT_SECRET=$clientSecret
