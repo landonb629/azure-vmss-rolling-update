@@ -5,6 +5,8 @@ RUN apt-get update && \
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
+RUN npm install
+
 COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]
