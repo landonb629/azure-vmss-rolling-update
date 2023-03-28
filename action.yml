@@ -16,6 +16,8 @@ inputs:
   scaleSetName: 
     description: 'scale set name'
     required: true
+  subscriptionId: 
+    description: 'Azure subscription ID'
 outputs:
   resourceGroupId: 
     description: 'the ID of the resource group that was found'
@@ -28,4 +30,5 @@ runs:
     - ${{ inputs.clientId}}
     - ${{ inputs.clientSecret}}
     - ${{ inputs.scaleSetName }}
+    - ${{ inputs.subscriptionId }}
     

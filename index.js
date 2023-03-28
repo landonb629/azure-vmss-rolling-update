@@ -1,16 +1,10 @@
 const {DefaultAzureCredential, ClientSecretCredential }= require('@azure/identity')
 const { SubscriptionClient } = require('@azure/arm-subscriptions')
 const { ComputeManagementClient } = require('@azure/arm-compute')
-const { ResourceManagementClient } = require('@azure/arm-resources')
 
-/*
-1. update the virtual machine scale set
-2. wait for it to be complete
-3. return 
-
-*/
 
 // bash script would need to set the environment variables 
+const subscriptionId = process.env["AZURE_SUBSCRIPTION_ID"]
 const tenantId = process.env["AZURE_TENANT_ID"]
 const clientId = process.env["AZURE_CLIENT_ID"]
 const clientSecret = process.env["AZURE_CLIENT_SECRET"]
@@ -18,19 +12,13 @@ const resourceGroupName = process.env["resourceGroup"]
 const vmScaleSetName = process.env["scaleSetName"]
 const updatedImage = "/subscriptions/f80dea2d-81bb-442f-a102-d86eb72cb7d6/resourceGroups/aks-demos/providers/Microsoft.Compute/images/prod-frontend-new"
 
-/*
-    for await (const rgs of client.resourceGroups.list()) { 
-        console.log(rgs.name)
-    }
-    */
-
 
 const creds = new ClientSecretCredential(tenantId, clientId, clientSecret)
 
 const main = async () => { 
 try { 
-    const getSubscriptionId = await listSubs()
-    const client = new ComputeManagementClient(creds, getSubscriptionId)
+    //const getSubscriptionId = await listSubs()
+    const client = new ComputeManagementClient(creds, subscriptionId)
     //const result = await client.virtualMachineScaleSets.get(resourceGroupName, vmScaleSetName)
     const parameter = { 
         virtualMachineProfile: { 
@@ -41,7 +29,9 @@ try {
             }
         }
    }
-   const updatingVirtualMachineScaleSet = updateScaleSet(resourceGroupName, vmScaleSetName, parameter, client)
+   const triggerUpdate = await client.virtualMachineScaleSets.beginUpdateAndWait(resourceGroupName, vmScaleSetName, parameter)
+   console.log(triggerUpdate);
+   //const updatingVirtualMachineScaleSet = updateScaleSet(resourceGroupName, vmScaleSetName, parameter, client)
    // code to update the vm scale set 
    // code to get the status object
    
@@ -74,7 +64,7 @@ const listSubs = async () => {
 
 const updateScaleSet = async (resourceGroup, scaleSetName, parameter, client) => { 
     try { 
-       const triggerUpdate =  await client.virtualMachineScaleSets.beginUpdate(resourceGroup, scaleSetName, parameter )
+       const triggerUpdate =  await client.virtualMachineScaleSets.beginUpdateAndWait(resourceGroup, scaleSetName, parameter )
        console.log(triggerUpdate);
        return 
     } catch(error) { 
