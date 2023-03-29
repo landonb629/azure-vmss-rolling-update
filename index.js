@@ -16,7 +16,7 @@ const updatedImage = "/subscriptions/f80dea2d-81bb-442f-a102-d86eb72cb7d6/resour
 const creds = new ClientSecretCredential(tenantId, clientId, clientSecret)
 
 const main = async () => { 
-try { 
+    try { 
     //const getSubscriptionId = await listSubs()
     const client = new ComputeManagementClient(creds, subscriptionId)
     //const result = await client.virtualMachineScaleSets.get(resourceGroupName, vmScaleSetName)
@@ -29,17 +29,19 @@ try {
             }
         }
    }
-   const triggerUpdate = await client.virtualMachineScaleSets.beginUpdateAndWait(resourceGroupName, vmScaleSetName, parameter)
    console.log('running rolling update....');
+   const triggerUpdate = await client.virtualMachineScaleSets.beginUpdateAndWait(resourceGroupName, vmScaleSetName, parameter)
    console.log(`Rolling update status: ${triggerUpdate.status}`);
    let status = await client.virtualMachineScaleSets.getInstanceView(resourceGroupName, vmScaleSetName)
    let progress = status.statuses[0].code;
    console.log(progress);
    //const updatingVirtualMachineScaleSet = updateScaleSet(resourceGroupName, vmScaleSetName, parameter, client)
 
-} catch(error) { 
-    console.log(error)
-}
+    } catch(error) { 
+        console.log(error);
+        process.exit(1)
+    }
+   
 }
 
 // function where we get the subscription ID that we are authenticated to 
