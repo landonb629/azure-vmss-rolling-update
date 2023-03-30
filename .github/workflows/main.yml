@@ -14,11 +14,11 @@ jobs:
         env:
           resourceGroup: 'aks-demo'
           scaleSetName: 'test'
-          tenantId: ${{ secrets.AZURE_TENANT_ID }}
-          clientId: ${{secrets.AZURE_CLIENT_ID}}
-          clientSecret: ${{secrets.AZURE_CLIENT_SECRET}}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
+          AZURE_CLIENT_SECRET: ${{secrets.AZURE_CLIENT_SECRET}}
           imageId: "/subscriptions/f80dea2d-81bb-442f-a102-d86eb72cb7d6/resourceGroups/aks-demos/providers/Microsoft.Compute/images/prod-frontend-initial"
-          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           
           
       - name: get the output 
