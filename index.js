@@ -32,7 +32,7 @@ const main = async () => {
    console.log(`Rolling update status: ${triggerUpdate.status}`);
     } catch(error) { 
         console.log(error);
-        process.exit(1)
+        process.exit(1);
     }
    
 }

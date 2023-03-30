@@ -1,27 +1,28 @@
 #!/bin/bash
-set -e
+GREEN=$'\e[0;32m'
+RED=$'\e[0;31m'
+NC=$'\e[0m'
 az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID 
 loginStatus=$?
 echo $loginStatus
 if [[ $loginStatus -eq 1 ]]
 then
-  echo "there was an error authenticating to Azure"
-  echo "check /tmp/authlog.txt for the error message"
+  echo "${RED}there was an error authenticating to Azure${NC}"
+  echo "${RED}check /tmp/authlog.txt for the error message${NC}"
 elif [[ $loginStatus -eq 0 ]]
 then 
-  echo "Successfully authenticated to Azure"
+  echo "${GREEN}Successfully authenticated to Azure${NC}"
 fi
 
 node index.js
 updateStatus=$?
-
+echo $updateStatus
 if [[ $updateStatus -eq 1 ]]
 then 
-  echo "Deployment Failed: please check the output for the error message"
-  exit
+  echo "${RED}Deployment Failed: please check the output for the error message${NC}"
 elif [[ $status -eq 0 ]]
 then 
-  echo "Deployment Completed"
+  echo "${GREEN}Deployment Completed{NC}"
 fi
 
 
