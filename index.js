@@ -10,7 +10,7 @@ const clientId = process.env["AZURE_CLIENT_ID"]
 const clientSecret = process.env["AZURE_CLIENT_SECRET"]
 const resourceGroupName = process.env["resourceGroup"]
 const vmScaleSetName = process.env["scaleSetName"]
-const updatedImage = "/subscriptions/f80dea2d-81bb-442f-a102-d86eb72cb7d6/resourceGroups/aks-demos/providers/Microsoft.Compute/images/prod-frontend-new"
+const updatedImage = "/subscriptions/f80dea2d-81bb-442f-a102-d86eb72cb7d6/resourceGroups/aks-demos/providers/Microsoft.Compute/images/prod-frontend-initial"
 
 
 const creds = new ClientSecretCredential(tenantId, clientId, clientSecret)
@@ -30,11 +30,6 @@ const main = async () => {
    console.log('running rolling update....');
    const triggerUpdate = await client.virtualMachineScaleSets.beginUpdateAndWait(resourceGroupName, vmScaleSetName, parameter)
    console.log(`Rolling update status: ${triggerUpdate.status}`);
-   let status = await client.virtualMachineScaleSets.getInstanceView(resourceGroupName, vmScaleSetName)
-   let progress = status.statuses[0].code;
-   console.log(progress);
-   //const updatingVirtualMachineScaleSet = updateScaleSet(resourceGroupName, vmScaleSetName, parameter, client)
-
     } catch(error) { 
         console.log(error);
         process.exit(1)
@@ -65,17 +60,6 @@ const updateScaleSet = async (resourceGroup, scaleSetName, parameter, client) =>
       console.log(error);
     }
 }
-
-const checkScaleSet = async (resourecGroup, scaleSetName, client) => { 
-    try { 
-        let status = await client.virtualMachineScaleSets.getInstanceView(resourceGroupName, vmScaleSetName)
-        let progress = status.statuses.forEach((index)=> console.log(index.code));
-        return
-    } catch(error) { 
-
-    }
-}
-
 
 main(creds)
 
