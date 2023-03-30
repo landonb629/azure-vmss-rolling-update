@@ -15,4 +15,4 @@ COPY . .
 
 COPY entrypoint.sh /entrypoint.sh
 
-CMD [ "tail", "-f", "/dev/null" ]
+CMD [ "./entrypoint.sh" ]

@@ -6,6 +6,9 @@ if [[ $loginStatus -eq 1 ]]
 then
   echo "there was an error authenticating to Azure"
   echo "check /tmp/authlog.txt for the error message"
+elif [[ $loginStatus -eq 0 ]]
+then 
+  echo "Successfully authenticated to Azure"
 fi
 
 node index.js

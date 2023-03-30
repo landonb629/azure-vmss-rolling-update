@@ -17,9 +17,7 @@ const creds = new ClientSecretCredential(tenantId, clientId, clientSecret)
 
 const main = async () => { 
     try { 
-    //const getSubscriptionId = await listSubs()
     const client = new ComputeManagementClient(creds, subscriptionId)
-    //const result = await client.virtualMachineScaleSets.get(resourceGroupName, vmScaleSetName)
     const parameter = { 
         virtualMachineProfile: { 
             storageProfile: { 
