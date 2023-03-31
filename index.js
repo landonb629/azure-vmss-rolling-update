@@ -31,7 +31,10 @@ const main = async () => {
    const triggerUpdate = await client.virtualMachineScaleSets.beginUpdateAndWait(resourceGroupName, vmScaleSetName, parameter)
    console.log(`Rolling update status: ${triggerUpdate.status}`);
     } catch(error) { 
-        console.log(error);
+        const { code, details, statusCode } = error 
+        if (statusCode === 404) { 
+            console.log(details.error.message);
+        }
         process.exit(1);
     }
    
