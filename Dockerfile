@@ -15,5 +15,5 @@ COPY . .
 
 COPY entrypoint.sh /entrypoint.sh
 
-CMD ["tail", "-f", "/dev/null"]
-#ENTRYPOINT [ "./entrypoint.sh" ]
+#CMD ["tail", "-f", "/dev/null"]
+ENTRYPOINT [ "./entrypoint.sh" ]
