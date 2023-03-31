@@ -8,7 +8,7 @@ echo $loginStatus
 if [[ $loginStatus -eq 1 ]]
 then
   echo "${RED}there was an error authenticating to Azure${NC}"
-  exit
+  exit 1
 elif [[ $loginStatus -eq 0 ]]
 then 
   echo "${GREEN}Successfully authenticated to Azure${NC}"
@@ -20,7 +20,7 @@ updateStatus=$?
 if [[ $updateStatus -eq 1 ]]
 then 
   echo "${RED}Deployment Failed: please check the output for the error message${NC}"
-  exit
+  exit 1
 elif [[ $status -eq 0 ]]
 then 
   echo "${GREEN}Deployment Completed${NC}"
