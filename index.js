@@ -33,6 +33,7 @@ const main = async () => {
     } catch(error) { 
         const { code, details, statusCode } = error 
         if (statusCode === 404) { 
+            console.log("ERROR ENCOUNTERED WHILE RUNNING: ");
             console.log(details.error.message);
         }
         process.exit(1);
