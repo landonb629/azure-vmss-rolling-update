@@ -23,7 +23,7 @@ then
   exit
 elif [[ $status -eq 0 ]]
 then 
-  echo "${GREEN}Deployment Completed{NC}"
+  echo "${GREEN}Deployment Completed${NC}"
 fi
 
 

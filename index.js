@@ -54,15 +54,6 @@ const listSubs = async () => {
     }
 }
 
-const updateScaleSet = async (resourceGroup, scaleSetName, parameter, client) => { 
-    try { 
-       const triggerUpdate =  await client.virtualMachineScaleSets.beginUpdateAndWait(resourceGroup, scaleSetName, parameter )
-       console.log(triggerUpdate);
-       return 
-    } catch(error) { 
-      console.log(error);
-    }
-}
 
 main(creds)
 
