@@ -21,8 +21,6 @@ AZURE_SUBSCRIPTION_ID
 # EXAMPLE USAGE 
 
 
-referencing the samples 
-https://github.com/Azure-Samples/azure-sdk-for-js-samples
 
 
 KNOWN ISSUE:
