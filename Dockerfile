@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM --platform=linux/arm64 ubuntu
 
 RUN curl -sl https://deb.nodesource.com/setup_18.x | bash -
 
