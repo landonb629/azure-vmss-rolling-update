@@ -18,12 +18,9 @@ inputs:
     required: true
   subscriptionId: 
     description: 'Azure subscription ID'
-outputs:
-  resourceGroupId: 
-    description: 'the ID of the resource group that was found'
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'lbabay.azurecr.io/az-vmss-rolling-update:v1.0'
   args: 
     - ${{ inputs.resourceGroup }}
     - ${{ inputs.tenantId }}
