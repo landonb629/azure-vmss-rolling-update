@@ -1,5 +1,5 @@
 name: 'Trigger Azure Virtual Machine Scale Set Rolling Update'
-description: 'triggers a rolling update for azure virtual machine scale set'
+description: 'triggers a rolling update for azure virtual machine scale set that use custom images'
 inputs: 
   resourceGroup:
     description: 'name of resource group for virtual machine scale set'
