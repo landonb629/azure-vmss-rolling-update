@@ -2,6 +2,7 @@
 GREEN=$'\e[0;32m'
 RED=$'\e[0;31m'
 NC=$'\e[0m'
+
 az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID > /dev/null 2>&1 
 loginStatus=$?
 echo $loginStatus
