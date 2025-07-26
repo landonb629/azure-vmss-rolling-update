@@ -10,7 +10,7 @@ const clientId = process.env["AZURE_CLIENT_ID"]
 const clientSecret = process.env["AZURE_CLIENT_SECRET"]
 const resourceGroupName = process.env["resourceGroup"]
 const vmScaleSetName = process.env["scaleSetName"]
-const updatedImage = "/subscriptions/f80dea2d-81bb-442f-a102-d86eb72cb7d6/resourceGroups/aks-demos/providers/Microsoft.Compute/images/prod-frontend-initial"
+const updatedImage = "/subscriptions/$SUBSCRIPTION_ID/resourceGroups/aks-demos/providers/Microsoft.Compute/images/prod-frontend-initial"
 
 
 const creds = new ClientSecretCredential(tenantId, clientId, clientSecret)
